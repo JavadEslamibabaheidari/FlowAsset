@@ -31,4 +31,4 @@ jobs:
         run: dotnet test FlowAsset.slnx --no-build --configuration Release
 
       - name: Build Docker image
-        run: docker build -t flowasset:latest .
+        run: docker build -t flowasset:latest ./FlowAsset 
