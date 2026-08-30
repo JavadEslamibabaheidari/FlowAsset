@@ -1,0 +1,6 @@
+@FlowAsset_HostAddress = http://localhost:5210
+
+GET {{FlowAsset_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
