@@ -11,7 +11,11 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
+    
+    permissions:
+      contents: read
+      packages: write
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -30,5 +34,15 @@ jobs:
       - name: Test
         run: dotnet test FlowAsset.slnx --no-build --configuration Release
 
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build Docker image
-        run: docker build -t flowasset:latest ./FlowAsset 
+        run: docker build -t ghcr.io/javadeslamibabaheidari/flowasset:latest ./FlowAsset 
+      
+      - name: Push Docker image
+        run: docker push ghcr.io/javadeslamibabaheidari/flowasset:latest
