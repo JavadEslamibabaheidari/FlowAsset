@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: flowasset
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: flowasset
+
+  template:
+    metadata:
+      labels:
+        app: flowasset
+
+    spec:
+      containers:
+        - name: flowasset
+          image: flowasset:latest
+
+          ports:
+            - containerPort: 5210
